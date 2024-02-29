@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+    image: kirna-bhandar
+    restart: "no"
+    environment:
+      - DBHOST=postgresql
+      - DBUSER=postgres
+      - DBPASS=root
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgresql
+
+  postgresql:
+    image: postgres
+    restart: "no"
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_DB: kirna_bhandar_development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+
+volumes:
+  postgresdb:
